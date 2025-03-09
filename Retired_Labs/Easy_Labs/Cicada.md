@@ -4,7 +4,7 @@ What is the name of the non-default SMB share that is readable with guest access
 
 NMAP scan shows that smb port 445 is open and the question indicates that guest is accessible.
 Using this I used SMBMap with the user guest to enumerate the shares, and this shows us that we have read access to "HR".
-![SMBMap](<Screenshot 2025-03-09 220324.png>)
+![SMBMap](<IMages/Screenshot 2025-03-09 220324.png>)
 
 What is the name of the file found in the HR share?
 
@@ -22,7 +22,7 @@ We now need to find the account name.
 lets use crackmapexec to try and find valid usernames
 crackmapexec smb 10.10.11.35 -u 'guest' -p "" --rid-brute | grep "SidTypeUser"    
 
-![Usernames](<Screenshot 2025-03-09 224323.png>)
+![Usernames](<IMages/Screenshot 2025-03-09 224323.png>)
 Now we have valid usernames, lets try and crack the account using msfconsole scanner/smb/smb_login
 
 set all the options and exploit
@@ -56,7 +56,7 @@ a3fbf886d263e73beb7445106567cfa8
 What dangerous privilege does the emily.oscar user have associated with their account?
 
 i used the coommand whoami /priv to get their privs
-![privs](<Screenshot 2025-03-09 230911.png>)
+![Privs](<IMages/Screenshot 2025-03-09 230911.png>)
 
 SEBackupPrivilege
 

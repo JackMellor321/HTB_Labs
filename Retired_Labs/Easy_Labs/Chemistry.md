@@ -26,6 +26,7 @@ we can see two ports open
 2. What is the path of the example CIF file available in the dashboard?
 at the login page I created an accoutn jack:jack allowing me access to the dashboard
 View page source to get the answer
+
 ![alt text](<IMages/Screenshot 2025-03-17 181549.png>)
 
 
@@ -93,6 +94,7 @@ we now have password so lets ssh to rosa's account
 8. What TCP port that is listneing only on the localhost interface and hosting a webserver?
 lets run the following command to see what's listening on local host
 upgraded shell using the following
+
 ![alt text](IMages/image.png)
 
 netstat -tnlp
@@ -103,6 +105,7 @@ port forwarded using the following command
 ssh -L 8888:127.0.0.1:8080 rosa@10.10.11.38
 
 i can now run the website on my local machine allowing me to use burp
+
 ![alt text](IMages/image1.png)
 
 I opened the browser in burp and went onto the webpage - chose the options and the only that worked was "list services", i chose this, forwarded the reqeuest and now know the answer is AIOHTTP/3.9.1, maybe we can priv esc
@@ -115,14 +118,19 @@ CVE-2024-23334
 
 12. root flag
 We can look at the source code and see static pages
+
 ![alt text](IMages/image2.png)
+
 lets input that into burp into the get parameter and see what we get
+
 ![alt text](IMages/image3.png)
 
 now we know that works, lets try and get to the root flag
 I got a bit stuck so used some help, realised we needed to look for the ssh key in root then we can use that to ssh in and access root
 
 after stealing the id_rsa by using 
+
 ![alt text](IMages/image4.png)
+
 i need to change the permissions of the key to chmod 600 which i can then use to ssh onto the target with
-ssh -i id_rsa root@*.*.*.* which gives me passwordless access to root and the final flag
+ssh -i id_rsa root@*.*.*.* which gives me passwordless access to root and the final flag.
